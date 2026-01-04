@@ -1,0 +1,223 @@
+:root {
+    --primary-bg-color: #1a1a2e;
+    --secondary-bg-color: #16213e;
+    --tertiary-bg-color: #0f3460;
+    --primary-text-color: #e94560;
+    --secondary-text-color: #dcdcdc;
+    --accent-color: #e94560;
+    --button-bg-color: #e94560;
+    --button-text-color: #ffffff;
+    --shadow-color: rgba(233, 69, 96, 0.4);
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--primary-bg-color);
+    color: var(--secondary-text-color);
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+#app-container {
+    width: 100%;
+    max-width: 1200px;
+    background-color: var(--secondary-bg-color);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+header {
+    background: linear-gradient(45deg, var(--tertiary-bg-color), var(--accent-color));
+    color: white;
+    text-align: center;
+    padding: 20px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+header h1 {
+    margin: 0;
+    font-weight: 600;
+}
+
+header p {
+    margin: 5px 0 0;
+    font-weight: 300;
+}
+
+main {
+    display: flex;
+    padding: 20px;
+    gap: 20px;
+}
+
+#controls-panel {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#content-display {
+    flex: 1;
+    display: flex;
+    gap: 20px;
+    min-width: 0;
+}
+
+.button {
+    background-color: var(--button-bg-color);
+    color: var(--button-text-color);
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px var(--shadow-color);
+}
+
+.button:hover, .button:focus {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px var(--shadow-color);
+    filter: brightness(1.1);
+}
+
+#file-upload-area {
+    background: var(--tertiary-bg-color);
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+#file-name {
+    margin-top: 10px;
+    font-size: 0.9em;
+    word-break: break-all;
+}
+
+#tts-controls, #api-key-area {
+    background: var(--tertiary-bg-color);
+    padding: 20px;
+    border-radius: 12px;
+}
+
+h2 {
+    color: var(--primary-text-color);
+    margin-top: 0;
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.control-group {
+    margin-bottom: 15px;
+}
+
+.control-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+select, input[type="range"], input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid var(--tertiary-bg-color);
+    background-color: var(--primary-bg-color);
+    color: var(--secondary-text-color);
+}
+
+#speed-control {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 8px;
+    background: var(--primary-bg-color);
+    outline: none;
+    border-radius: 5px;
+}
+
+#speed-control::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: var(--accent-color);
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+#api-key-area .control-group {
+    display: flex;
+    gap: 10px;
+}
+
+#chapter-list {
+    background: var(--tertiary-bg-color);
+    padding: 20px;
+    border-radius: 12px;
+    width: 200px;
+}
+
+#chapters {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+#chapters li {
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+#chapters li:hover {
+    background-color: var(--secondary-bg-color);
+}
+
+#chapters li.active {
+    background-color: var(--accent-color);
+    color: white;
+    font-weight: 600;
+}
+
+#text-display-area {
+    flex: 1;
+    background: var(--tertiary-bg-color);
+    padding: 20px;
+    border-radius: 12px;
+    min-width: 0;
+    overflow-y: auto;
+    max-height: 500px;
+}
+
+#text-content {
+    font-size: 1.1em;
+    line-height: 1.6;
+}
+
+footer {
+    background-color: var(--tertiary-bg-color);
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#playback-controls {
+    display: flex;
+    gap: 15px;
+}
+
+#playback-controls .button {
+    font-size: 1.2em;
+    padding: 12px 20px;
+}

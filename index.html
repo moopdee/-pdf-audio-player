@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AudioBook Sparkle - Your PDF to Speech Companion</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
+</head>
+<body>
+    <div id="app-container">
+        <header>
+            <h1>✨ AudioBook Sparkle ✨</h1>
+            <p>Your personal PDF to speech companion</p>
+        </header>
+
+        <main>
+            <div id="controls-panel">
+                <div id="file-upload-area">
+                    <label for="pdf-upload" class="button">Upload PDF</label>
+                    <input type="file" id="pdf-upload" accept=".pdf" hidden>
+                    <p id="file-name">No file selected</p>
+                </div>
+
+                <div id="tts-controls">
+                    <h2>Settings</h2>
+                    <div class="control-group">
+                        <label for="voice-select">Voice</label>
+                        <select id="voice-select">
+                            <!-- Voices will be populated dynamically by JavaScript -->
+                        </select>
+                    </div>
+                    <div class="control-group">
+                        <label for="speed-control">Speed</label>
+                        <input type="range" id="speed-control" min="0.5" max="2" step="0.25" value="1">
+                        <span id="speed-value">1x</span>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div id="content-display">
+                <div id="chapter-list">
+                    <h2>Chapters</h2>
+                    <ul id="chapters">
+                        <!-- Chapters will be populated here by JavaScript -->
+                    </ul>
+                </div>
+
+                <div id="text-display-area">
+                    <h2 id="current-chapter-title"></h2>
+                    <div id="text-content">
+                        <p>Upload a PDF to get started!</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <div id="playback-controls">
+                <button id="prev-chapter-button" class="button">⏮️ Prev</button>
+                <button id="play-pause-button" class="button">▶️ Play</button>
+                <button id="next-chapter-button" class="button">Next ⏭️</button>
+            </div>
+
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
