@@ -221,3 +221,46 @@ footer {
     font-size: 1.2em;
     padding: 12px 20px;
 }
+
+/* --- Responsive Design for Mobile --- */
+@media (max-width: 768px) {
+    body {
+        padding: 0;
+    }
+
+    #app-container {
+        border-radius: 0;
+        min-height: 100vh;
+    }
+
+    main {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    #controls-panel {
+        width: 100%;
+    }
+
+    #content-display {
+        flex-direction: column;
+    }
+
+    #chapter-list {
+        width: 100%;
+        max-height: 150px; /* Make chapter list smaller on mobile */
+    }
+
+    header h1 {
+        font-size: 1.5em;
+    }
+
+    #text-content {
+        font-size: 1em;
+    }
+
+    footer {
+        flex-direction: column;
+        gap: 15px;
+    }
+}
