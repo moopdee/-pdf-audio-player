@@ -22,26 +22,63 @@ let textChunks = [];
 let currentChunkIndex = 0;
 
 // --- Event Listeners ---
-pdfUpload.addEventListener('change', handlePdfUpload);
-speedControl.addEventListener('input', handleSpeedChange);
-playPauseButton.addEventListener('click', handlePlayPause);
-prevChapterButton.addEventListener('click', handlePrevChapter);
-nextChapterButton.addEventListener('click', handleNextChapter);
-chapterList.addEventListener('click', handleChapterSelection);
+pdfUpload.addEventListener('change', handleFileUpload);
 
 // --- Functions ---
 
-function handlePdfUpload(e) {
+function handleFileUpload(e) {
     stopAudio();
     const file = e.target.files[0];
-    if (file && file.type === 'application/pdf') {
-        fileNameDisplay.textContent = file.name;
-        textContent.textContent = 'Processing PDF...';
-        const reader = new FileReader();
-        reader.onload = (event) => parsePdf(event.target.result);
-        reader.readAsArrayBuffer(file);
-    } else {
-        fileNameDisplay.textContent = 'Please select a valid PDF file.';
+    if (!file) return;
+
+    fileNameDisplay.textContent = file.name;
+    textContent.textContent = 'Processing file...';
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+        const arrayBuffer = event.target.result;
+        if (file.name.endsWith('.pdf')) {
+            parsePdf(arrayBuffer);
+        } else if (file.name.endsWith('.epub')) {
+            parseEpub(arrayBuffer);
+        } else {
+            textContent.textContent = 'Unsupported file type. Please upload a PDF or EPUB.';
+        }
+    };
+    reader.readAsArrayBuffer(file);
+}
+
+async function parseEpub(arrayBuffer) {
+    try {
+        const book = ePub(arrayBuffer);
+        const nav = await book.loaded.navigation;
+        
+        chapters = await Promise.all(nav.toc.map(async (tocItem) => {
+            const section = book.section(tocItem.href);
+            const loaded = await section.load();
+            
+            // Create a temporary div to extract text from the HTML content
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = loaded.innerHTML;
+            const content = tempDiv.textContent || tempDiv.innerText || '';
+            
+            return {
+                title: tocItem.label.trim(),
+                content: content.trim()
+            };
+        }));
+
+        displayChapters();
+        
+        if (savedProgress && savedProgress.pdfName === fileNameDisplay.textContent) {
+            loadChapter(savedProgress.chapterIndex);
+            savedProgress = null; // Reset after loading
+        } else {
+            loadChapter(0);
+        }
+    } catch (error) {
+        console.error('Error parsing EPUB:', error);
+        textContent.textContent = 'Error parsing EPUB file. It might be corrupted or protected.';
     }
 }
 
